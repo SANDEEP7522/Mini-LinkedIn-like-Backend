@@ -8,6 +8,8 @@ import {
   SMTP_USER
 } from '../config/serverConfig.js';
 
+console.log(SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SMTP_SERVICE, SMTP_USER);
+
 export const sendEmail = async ({ email, subject, message }) => {
   try {
     const transporter = nodeMailer.createTransport({
@@ -26,6 +28,7 @@ export const sendEmail = async ({ email, subject, message }) => {
       subject: subject,
       html: message
     };
+    // console.log('Email options:', options);
 
     await transporter.sendMail(options);
   } catch (error) {
