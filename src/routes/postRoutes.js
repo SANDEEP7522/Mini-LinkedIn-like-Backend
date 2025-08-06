@@ -9,7 +9,7 @@ import {
 } from '../controllers/postController.js';
 import { isAuthenticated } from '../middlewares/auth.js';
 import upload from '../utils/cloudinares/multer.js';
-import { addComment, toggleLike } from '../controllers/likeController.js';
+import { addComment, toggleBookmark, toggleLike } from '../controllers/likeController.js';
 
 const router = express.Router();
 
@@ -21,5 +21,7 @@ router.delete('/:id', isAuthenticated, deletePost);
 
 router.patch("/:id", isAuthenticated, toggleLike);
 router.post("/:Id", isAuthenticated, addComment);
+router.patch("/:postId", isAuthenticated, toggleBookmark);
+
 
 export default router;

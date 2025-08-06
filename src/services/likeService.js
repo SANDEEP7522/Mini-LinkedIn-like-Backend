@@ -1,4 +1,5 @@
 import Post from "../models/post.js";
+import User from "../models/userModel.js";
 
 export const toggleLikeService = async (postId, userId) => {
   const post = await Post.findById(postId);
@@ -30,4 +31,22 @@ export const addCommentService = async (postId, userId, text) => {
   await post.save();
 
   return post.comments[post.comments.length - 1]; // latest comment
+};
+
+
+
+export const toggleBookmarkService = async (postId, userId) => {
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found");
+
+  const isBookmarked = user.bookmarks.includes(postId);
+
+  if (isBookmarked) {
+    user.bookmarks.pull(postId);
+  } else {
+    user.bookmarks.push(postId);
+  }
+
+  await user.save();
+  return { bookmarked: !isBookmarked };
 };
