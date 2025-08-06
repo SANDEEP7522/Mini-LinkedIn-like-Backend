@@ -50,3 +50,28 @@ export const toggleBookmarkService = async (postId, userId) => {
   await user.save();
   return { bookmarked: !isBookmarked };
 };
+
+
+export const toggleFollowService = async (targetUserId, currentUserId) => {
+  if (targetUserId === currentUserId) throw new Error("Cannot follow yourself");
+
+  const targetUser = await User.findById(targetUserId);
+  const currentUser = await User.findById(currentUserId);
+
+  if (!targetUser || !currentUser) throw new Error("User not found");
+
+  const alreadyFollowing = currentUser.followings.includes(targetUserId);
+
+  if (alreadyFollowing) {
+    currentUser.followings.pull(targetUserId);
+    targetUser.followers.pull(currentUserId);
+  } else {
+    currentUser.followings.push(targetUserId);
+    targetUser.followers.push(currentUserId);
+  }
+
+  await currentUser.save();
+  await targetUser.save();
+
+  return { followings: !alreadyFollowing };
+};

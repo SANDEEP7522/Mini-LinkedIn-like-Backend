@@ -1,4 +1,9 @@
-import { addCommentService, toggleBookmarkService, toggleLikeService } from '../services/likeService.js';
+import {
+  addCommentService,
+  toggleBookmarkService,
+  toggleFollowService,
+  toggleLikeService
+} from '../services/likeService.js';
 
 export const toggleLike = async (req, res) => {
   try {
@@ -11,7 +16,6 @@ export const toggleLike = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
-
 
 export const addComment = async (req, res) => {
   try {
@@ -26,7 +30,6 @@ export const addComment = async (req, res) => {
   }
 };
 
-
 export const toggleBookmark = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -38,3 +41,17 @@ export const toggleBookmark = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+export const toggleFollow = async (req, res) => {
+  try {
+    const { userId } = req.params; // ID of user to follow/unfollow
+    const currentUserId = req.user._id;
+
+    const result = await toggleFollowService(userId, currentUserId);
+    res.status(200).json({ success: true, ...result });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+
