@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const postSchema = new mongoose.Schema({
   content: {
     type: String,
-    required: true
+    required: [true, "Post content is required"]
   },
   imageUrl: {
     type: String, // Cloudinary URL

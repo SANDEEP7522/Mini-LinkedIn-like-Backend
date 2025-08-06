@@ -14,6 +14,10 @@ export const getPostByIdService = async (postId) => {
   return await Post.findById(postId).populate('author', 'name email');
 };
 
+export const updatePostByIdService = async (postId, data) => {
+  return await Post.findByIdAndUpdate(postId, data, { new: true });
+};
+
 export const deletePostByIdService = async (postId) => {
   return await Post.findByIdAndDelete(postId);
 };

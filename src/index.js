@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { removeUnVerfiedAccount } from './automation/removeUnVerfiedAccount.js';
 import dbConection from './config/dbConfig.js';
-import { FRONTEND_URL, PORT } from './config/serverConfig.js';
+import { PORT } from './config/serverConfig.js';
 import { errorMiddleware } from './middlewares/error.js';
 import postRoutes from './routes/postRoutes.js';
 import userRouter from './routes/userRoute.js';
@@ -16,8 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [FRONTEND_URL],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: '*',
     credentials: true
   })
 );

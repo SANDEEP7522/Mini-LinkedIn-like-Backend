@@ -1,7 +1,8 @@
 import {
   createPostService,
   getAllPostsService,
-  getPostByIdService
+  getPostByIdService,
+  updatePostByIdService
 } from '../services/postService.js';
 
 export const createPost = async (req, res) => {
@@ -39,6 +40,21 @@ export const getPostById = async (req, res) => {
     res
       .status(500)
       .json({ message: 'Failed to fetch post', error: err.message });
+  }
+};
+
+export const updatePost = async (req, res) => {
+  try {
+    const { content } = req.body;
+    const post = await updatePostByIdService(req.params.id);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+    post.content = content;
+    await post.save();
+    res.status(200).json(post);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: 'Failed to update post', error: err.message });
   }
 };
 

@@ -3,6 +3,7 @@
 This is the backend for the **Mini LinkedIn-like** application. It handles user authentication, post management, profile handling, and other core features of a professional networking platform.
 
 ---
+
 ## 📦 Installation
 
 ```bash
@@ -18,7 +19,6 @@ CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-
 ## 🚀 Tech Stack
 
 - **Node.js** + **Express.js** – Backend server
@@ -33,9 +33,6 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
 ## 📁 Folder Structure
 
-
-
-
 ## 🚀 Features
 
 - Create Post (Text + Optional Image)
@@ -44,6 +41,3 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 - Get Single Post by ID
 - Auth protected routes using JWT
 - MongoDB + Mongoose schema
-
-
-
