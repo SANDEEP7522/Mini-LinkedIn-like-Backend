@@ -22,7 +22,28 @@ const userSchema = new mongoose.Schema(
     verificationCode: Number,
     verifecationCodeExpire: Date,
     resetPasswordToken: String,
-    resetPasswordExpire: Date
+    resetPasswordExpire: Date,
+
+    // post bookMARK by user
+    bookmarks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+      }
+    ],
+
+    followings: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
+    followers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
   { timestamps: true }
 );
