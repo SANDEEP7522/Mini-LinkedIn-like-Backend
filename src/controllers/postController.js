@@ -1,5 +1,6 @@
 import {
   createPostService,
+  deletePostByIdService,
   getAllPostsService,
   getPostByIdService,
   updatePostByIdService
@@ -60,7 +61,7 @@ export const updatePost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
   try {
-    const post = await getPostByIdService(req.params.id);
+    const post = await deletePostByIdService(req.params.id);
     if (!post) return res.status(404).json({ message: 'Post not found' });
     await post.remove();
     res.status(200).json({ message: 'Post deleted successfully' });

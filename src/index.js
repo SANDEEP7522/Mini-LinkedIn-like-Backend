@@ -7,6 +7,7 @@ import { removeUnVerfiedAccount } from './automation/removeUnVerfiedAccount.js';
 import dbConection from './config/dbConfig.js';
 import { PORT } from './config/serverConfig.js';
 import { errorMiddleware } from './middlewares/error.js';
+import likeRoute from './routes/likeRoute.js';
 import postRoutes from './routes/postRoutes.js';
 import userRouter from './routes/userRoute.js';
 const app = express();
@@ -16,12 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:5173',
     credentials: true
   })
 );
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRoutes);
+app.use('/api/v1', likeRoute);
 
 removeUnVerfiedAccount();
 

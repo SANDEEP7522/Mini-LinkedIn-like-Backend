@@ -1,9 +1,11 @@
-import Post from "../models/post.js";
-import User from "../models/userModel.js";
+import Post from '../models/post.js';
+import User from '../models/userModel.js';
 
 export const toggleLikeService = async (postId, userId) => {
   const post = await Post.findById(postId);
-  if (!post) throw new Error("Post not found");
+  // console.log('post', post);
+
+  if (!post) throw new Error('Post not found');
 
   const alreadyLiked = post.likes.includes(userId);
 
@@ -17,14 +19,13 @@ export const toggleLikeService = async (postId, userId) => {
   return { liked: !alreadyLiked };
 };
 
-
 export const addCommentService = async (postId, userId, text) => {
   const post = await Post.findById(postId);
-  if (!post) throw new Error("Post not found");
+  if (!post) throw new Error('Post not found');
 
   const comment = {
     user: userId,
-    text,
+    text
   };
 
   post.comments.push(comment);
@@ -33,11 +34,9 @@ export const addCommentService = async (postId, userId, text) => {
   return post.comments[post.comments.length - 1]; // latest comment
 };
 
-
-
 export const toggleBookmarkService = async (postId, userId) => {
   const user = await User.findById(userId);
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error('User not found');
 
   const isBookmarked = user.bookmarks.includes(postId);
 
@@ -51,14 +50,13 @@ export const toggleBookmarkService = async (postId, userId) => {
   return { bookmarked: !isBookmarked };
 };
 
-
 export const toggleFollowService = async (targetUserId, currentUserId) => {
-  if (targetUserId === currentUserId) throw new Error("Cannot follow yourself");
+  if (targetUserId === currentUserId) throw new Error('Cannot follow yourself');
 
   const targetUser = await User.findById(targetUserId);
   const currentUser = await User.findById(currentUserId);
 
-  if (!targetUser || !currentUser) throw new Error("User not found");
+  if (!targetUser || !currentUser) throw new Error('User not found');
 
   const alreadyFollowing = currentUser.followings.includes(targetUserId);
 
