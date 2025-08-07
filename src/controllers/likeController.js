@@ -1,6 +1,9 @@
+import User from '../models/userModel.js';
 import {
   addCommentService,
   getAllCommentsService,
+  getFollowersService,
+  getFollowingService,
   toggleBookmarkService,
   toggleFollowService,
   toggleLikeService
@@ -57,13 +60,40 @@ export const toggleBookmark = async (req, res) => {
   }
 };
 
+
+
+// Toggle follow/unfollow
 export const toggleFollow = async (req, res) => {
   try {
-    const { userId } = req.params; // ID of user to follow/unfollow
+    const targetUserId = req.params.userId;
     const currentUserId = req.user._id;
 
-    const result = await toggleFollowService(userId, currentUserId);
+    const result = await toggleFollowService(targetUserId, currentUserId);
     res.status(200).json({ success: true, ...result });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// Get all followers of a user
+export const getFollowers = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const followers = await getFollowersService(userId);
+    res.status(200).json({ success: true, followers });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// Get all followings of a user
+export const getFollowings = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const followings = await getFollowingService(userId);
+    res.status(200).json({ success: true, followings });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }

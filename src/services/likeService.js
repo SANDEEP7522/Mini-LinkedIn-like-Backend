@@ -36,10 +36,10 @@ export const addCommentService = async (postId, userId, text) => {
 
 export const getAllCommentsService = async (postId) => {
   const post = await Post.findById(postId)
-    .populate("comments.user", "name email") // populate user info
-    .select("comments");
+    .populate('comments.user', 'name email') // populate user info
+    .select('comments');
 
-  if (!post) throw new Error("Post not found");
+  if (!post) throw new Error('Post not found');
 
   return post.comments;
 };
@@ -82,4 +82,16 @@ export const toggleFollowService = async (targetUserId, currentUserId) => {
   await targetUser.save();
 
   return { followings: !alreadyFollowing };
+};
+
+export const getFollowersService = async (userId) => {
+  const user = await User.findById(userId).populate("followers", "name email"); // customize fields
+  if (!user) throw new Error("User not found");
+  return user.followers;
+};
+
+export const getFollowingService = async (userId) => {
+  const user = await User.findById(userId).populate("following", "name email");
+  if (!user) throw new Error("User not found");
+  return user.followings;
 };
