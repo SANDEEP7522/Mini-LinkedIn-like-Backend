@@ -6,9 +6,14 @@ import User from '../models/userModel.js';
 import { catchAsyncError } from './catchAsycError.js';
 
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
-  const { token } = req.cookies;
-  // const { token } = req.headers;
-  // console.log('token', token);
+  const cookieToken = req.cookies?.token;
+  const headerToken =
+    req.headers?.token || req.headers?.authorization?.split(' ')[1];
+
+  console.log('Cookie Token:', cookieToken);
+  console.log('Header Token:', headerToken);
+
+  const token = cookieToken || headerToken;
 
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).json({

@@ -2,6 +2,7 @@ import express from 'express';
 
 import {
   addComment,
+  getAllComments,
   toggleBookmark,
   toggleFollow,
   toggleLike
@@ -11,6 +12,7 @@ const router = express.Router();
 
 router.patch('/like/:postId', isAuthenticated, toggleLike);
 router.post('/comment/:postId', isAuthenticated, addComment);
+router.get("/comments/:postId", getAllComments);
 router.patch('/bookmark/:postId', isAuthenticated, toggleBookmark);
 router.patch('/follow/:userId', isAuthenticated, toggleFollow);
 

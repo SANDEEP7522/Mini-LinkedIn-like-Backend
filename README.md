@@ -4,6 +4,15 @@ This is the backend for the **Mini LinkedIn-like** application. It handles user 
 
 ---
 
+## 🚀 Project Features
+
+- User Authentication (Register/Login/forgetPassword)
+- Post Creation, like and Comments
+- Follow/Bookmark Functionality
+- JWT Auth
+- MongoDB & Express.js Backend
+- ✅ [Live API Documentation](https://documenter.getpostman.com/view/38636822/2sB3BDJApX)
+
 ## 📦 Installation
 
 ```bash
@@ -13,6 +22,16 @@ npm install
 PORT=8080
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
+
+
+SMTP_HOST=''
+SMTP_SERVICE=''
+SMTP_PORT=''
+SMTP_USER=''
+SMTP_PASSWORD=''
+JWT_SECRET=''
+JWT_EXPIRE=''
+COOKIE_EXPIRE=''
 
 CLOUDINARY_CLOUD_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
@@ -32,6 +51,59 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ---
 
 ## 📁 Folder Structure
+
+mini_linkdin/
+│
+├── src/
+│ ├── automation/
+│ │ └── removeUnVerifiedAccounts.js
+│ │
+│ ├── config/
+│ │ ├── dbConfig.js
+│ │ └── serverConfig.js
+│ │
+│ ├── controllers/
+│ │ ├── likeController.js
+│ │ ├── postController.js
+│ │ └── userController.js
+│ │
+│ ├── middlewares/
+│ │ ├── auth.js
+│ │ ├── catchAsyncError.js
+│ │ └── error.js
+│ │
+│ ├── models/
+│ │ ├── post.js
+│ │ └── userModel.js
+│ │
+│ ├── routes/
+│ │ ├── likeRoute.js
+│ │ ├── postRoutes.js
+│ │ └── userRoute.js
+│ │
+│ ├── services/
+│ │ ├── likeService.js
+│ │ └── postService.js
+│ │
+│ ├── utils/
+│ │ ├── cloudinares/
+│ │ │ └── cloudinary.js
+│ │ └── multer.js
+│ │
+│ └── commons/
+│ ├── emailObject.js
+│ ├── responseObject.js
+│ ├── errorHandler.js
+│ ├── sendEmail.js
+│ └── sendToken.js
+│
+├── .env
+├── .gitignore
+├── .prettierrc
+├── eslint.config.js
+├── package.json
+├── package-lock.json
+└── README.md
 
 ## 🚀 Features
 

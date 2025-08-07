@@ -1,5 +1,6 @@
 import {
   addCommentService,
+  getAllCommentsService,
   toggleBookmarkService,
   toggleFollowService,
   toggleLikeService
@@ -29,6 +30,18 @@ export const addComment = async (req, res) => {
     res.status(201).json({ success: true, comment });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const getAllComments = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    const comments = await getAllCommentsService(postId);
+
+    res.status(200).json({ success: true, comments });
+  } catch (error) {
+    res.status(404).json({ success: false, message: error.message });
   }
 };
 

@@ -34,6 +34,16 @@ export const addCommentService = async (postId, userId, text) => {
   return post.comments[post.comments.length - 1]; // latest comment
 };
 
+export const getAllCommentsService = async (postId) => {
+  const post = await Post.findById(postId)
+    .populate("comments.user", "name email") // populate user info
+    .select("comments");
+
+  if (!post) throw new Error("Post not found");
+
+  return post.comments;
+};
+
 export const toggleBookmarkService = async (postId, userId) => {
   const user = await User.findById(userId);
   if (!user) throw new Error('User not found');
