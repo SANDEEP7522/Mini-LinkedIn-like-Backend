@@ -33,7 +33,7 @@ export const SMTP_PASSWORD = process.env.SMTP_PASSWORD;
 
 export const JWT_SECRET = process.env.JWT_SECRET;
 
-export const JWT_EXPIRE = process.env.JWT_EXPIRE;
+export const JWT_EXPIRE = process.env.JWT_EXPIRE || '6d';
 
 export const COOKIE_EXPIRE = process.env.COOKIE_EXPIRE;
 

@@ -1,4 +1,3 @@
-import User from '../models/userModel.js';
 import {
   addCommentService,
   getAllCommentsService,
@@ -59,8 +58,6 @@ export const toggleBookmark = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
-
-
 
 // Toggle follow/unfollow
 export const toggleFollow = async (req, res) => {

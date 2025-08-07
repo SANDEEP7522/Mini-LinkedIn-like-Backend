@@ -21,6 +21,30 @@ export const createPost = async (req, res) => {
   }
 };
 
+// export const createPost = async (req, res) => {
+//   try {
+//     const { content } = req.body;
+//     const imageUrl = req.file?.path || '';
+
+//     if (!req.user || !req.user._id) {
+//       return res.status(401).json({ message: 'Unauthorized: No user found' });
+//     }
+
+//     const author = req.user._id;
+
+//     console.log('Creating post with:', { content, imageUrl, author });
+
+//     const post = await createPostService({ content, imageUrl, author });
+
+//     res.status(201).json(post);
+//   } catch (err) {
+//     console.error('Create Post Error:', err);
+//     res
+//       .status(500)
+//       .json({ message: 'Post creation failed', error: err.message });
+//   }
+// };
+
 export const getAllPosts = async (req, res) => {
   try {
     const posts = await getAllPostsService();

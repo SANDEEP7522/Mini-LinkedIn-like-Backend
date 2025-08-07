@@ -6,7 +6,6 @@ import User from '../models/userModel.js';
 import { catchAsyncError } from './catchAsycError.js';
 
 export const isAuthenticated = catchAsyncError(async (req, res, next) => {
-  // both cookie and header method
   const cookieToken = req.cookies?.token;
   const headerToken =
     req.headers?.token || req.headers?.authorization?.split(' ')[1];
@@ -14,7 +13,9 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   console.log('Cookie Token:', cookieToken);
   console.log('Header Token:', headerToken);
 
-  const token = cookieToken || headerToken;
+  const token = req.cookies?.token || req.headers?.token;
+
+  console.log('token', token);
 
   if (!token) {
     return res.status(StatusCodes.UNAUTHORIZED).json({

@@ -18,7 +18,7 @@ router.get('/comments/:postId', getAllComments);
 router.patch('/bookmark/:postId', isAuthenticated, toggleBookmark);
 router.patch('/follow/:userId', isAuthenticated, toggleFollow);
 
-router.patch('/:userId', isAuthenticated, toggleFollow);
+router.patch('follow/:userId', isAuthenticated, toggleFollow);
 router.get('/followers/:userId', isAuthenticated, getFollowers);
 router.get('/followings/:userId', isAuthenticated, getFollowings);
 

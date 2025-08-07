@@ -85,13 +85,13 @@ export const toggleFollowService = async (targetUserId, currentUserId) => {
 };
 
 export const getFollowersService = async (userId) => {
-  const user = await User.findById(userId).populate("followers", "name email"); // customize fields
-  if (!user) throw new Error("User not found");
+  const user = await User.findById(userId).populate('followers', 'name email'); // customize fields
+  if (!user) throw new Error('User not found');
   return user.followers;
 };
 
 export const getFollowingService = async (userId) => {
-  const user = await User.findById(userId).populate("following", "name email");
-  if (!user) throw new Error("User not found");
+  const user = await User.findById(userId).populate('following', 'name email');
+  if (!user) throw new Error('User not found');
   return user.followings;
 };
